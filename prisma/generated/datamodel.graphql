@@ -1,0 +1,14 @@
+schema {
+  query: Query
+}
+
+type User {
+  # Common
+  id: ID! @unique
+  email: String! @unique
+  firstName: String!
+  lastName: String!
+  password: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
