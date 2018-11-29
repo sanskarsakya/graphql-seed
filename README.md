@@ -1,5 +1,5 @@
 # GraphQL Seed with Testing
-
+[![CircleCI](https://circleci.com/gh/mikk-io/graphql-seed/tree/master.svg?style=svg)](https://circleci.com/gh/mikk-io/graphql-seed/tree/master)
 Fully-feature modularized GraphQL Server boilerplate with production-ready containerized workflow.
 
 ## Overview
