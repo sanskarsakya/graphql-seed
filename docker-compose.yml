@@ -2,6 +2,7 @@ version: '3'
 services:
   prisma:
     image: prismagraphql/prisma:1.16
+    container_name: ${PRISMA_CONTAINER_NAME}
     restart: always
     depends_on: 
       - postgres
@@ -30,6 +31,12 @@ services:
       - POSTGRES_PASSWORD
     volumes:
       - postgres:/var/lib/postgresql/data
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL:
+      PGADMIN_DEFAULT_PASSWORD:
   backend:
     build: 
       context: .
@@ -41,4 +48,4 @@ services:
       PRISMA_SECRET:
       APP_SECRET:
 volumes: 
-  postgres: 
+  postgres:

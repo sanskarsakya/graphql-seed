@@ -1,22 +1,30 @@
 FROM node:10-alpine
- # Location of source code
+
+# Location of source code
 ENV PROJECT_ROOT /opt/app
 RUN mkdir -p $PROJECT_ROOT
 WORKDIR $PROJECT_ROOT
- # Copying src
+
+# Copying src
 COPY ./src ./src
 COPY ./tsconfig.json .
- # Copying scripts
+
+# Copying scripts
 COPY ./scripts ./scripts
 COPY ./scripts/wait-for.sh /
- #  Copying prima
+
+
+#  Copying prima
 COPY ./prisma ./prisma
 COPY ./.graphqlconfig.yml .
- # Copying requirements
+
+# Copying requirements
 COPY ./package.json .
 COPY ./yarn.lock .
 # Install requirements
 RUN yarn
- # Build dist
+
+# Build dist
 RUN yarn build
- CMD yarn start:prod 
+
+CMD yarn start:prod

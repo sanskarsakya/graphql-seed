@@ -1,5 +1,6 @@
 version: '3'
- services: 
+
+services: 
   nginx-proxy:
     image: jwilder/nginx-proxy
     labels:
@@ -23,6 +24,12 @@ version: '3'
       - ${NGINX_FILES_PATH:-./nginx-data}/vhost.d:/etc/nginx/vhost.d
       - ${NGINX_FILES_PATH:-./nginx-data}/html:/usr/share/nginx/html
       - ${NGINX_FILES_PATH:-./nginx-data}/certs:/etc/nginx/certs:rw
+  pgadmin:
+    environment: 
+      VIRTUAL_HOST: ${PGADMIN_VIRTUAL_HOST}
+      VIRTUAL_PORT: 80
+      LETSENCRYPT_HOST: ${PGADMIN_VIRTUAL_HOST}
+      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
   backend:
     restart: always
     ports: 
@@ -32,4 +39,4 @@ version: '3'
       VIRTUAL_HOST: ${BACKEND_VIRTUAL_HOST}
       LETSENCRYPT_HOST: ${BACKEND_VIRTUAL_HOST}
       LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
-    command: sh /wait-for.sh -t 30 prisma:4466 -- sh -c 'yarn prisma-deploy && yarn start:prod' 
+    command: sh /wait-for.sh -t 30 prisma:4466 -- sh -c 'yarn prisma-deploy && yarn start:prod'
